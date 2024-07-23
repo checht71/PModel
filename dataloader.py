@@ -10,7 +10,7 @@ def split_dataset(unsplit_set, split_ratio):
     return train_dataset, val_dataset
 
 
-def create_dataloader(IMAGE_LOCATION, LABEL_CSV_LOACTION, BATCH_SIZE, VAL_SPLIT_RATIO):
+def create_dataloaders(IMAGE_LOCATION, LABEL_CSV_LOACTION, BATCH_SIZE, VAL_SPLIT_RATIO):
     dataset = csvImageDataset(IMAGE_LOCATION, LABEL_CSV_LOACTION)
     train_dataset, val_dataset = split_dataset(dataset, VAL_SPLIT_RATIO)
 
@@ -20,13 +20,9 @@ def create_dataloader(IMAGE_LOCATION, LABEL_CSV_LOACTION, BATCH_SIZE, VAL_SPLIT_
 
 
 if __name__ == "__main__":
-    IMAGE_LOCATION = ""
-    LABEL_CSV_LOACTION = ""
+    IMAGE_LOCATION = "/media/christian/USB STICK/Images/Images"
+    LABEL_CSV_LOCATION = "/media/christian/USB STICK/labels/base_labels_2.csv"
     BATCH_SIZE = 16
     VAL_SPLIT_RATIO = 0.2
-    if IMAGE_LOCATION or LABEL_CSV_LOACTION == "":
-        print("Error: Empty Image or CSV file location")
-    try:
-        train_dataloader, validation_dataloader = create_dataloader(IMAGE_LOCATION, LABEL_CSV_LOACTION, BATCH_SIZE, VAL_SPLIT_RATIO)
-    except:
-        print("Error creating dataloaders")
+    train_dataloader, validation_dataloader = create_dataloaders(IMAGE_LOCATION, LABEL_CSV_LOCATION, BATCH_SIZE, VAL_SPLIT_RATIO)
+    print(len(train_dataloader), len(validation_dataloader))
