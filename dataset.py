@@ -27,10 +27,15 @@ class csvImageDataset(Dataset):
         return len(self.imgs)
 
     def __getitem__(self, idx): 
-        rawimg = Image.open(f'{self.image_dir}/{self.imgs.iat[idx, 0]}')
         try:
+            rawimg = Image.open(f'{self.image_dir}/{self.imgs.iat[idx, 0]}')
             trans_image= transforms(rawimg)
             numpyimage = np.array(trans_image)
             return numpyimage, self.labels.iat[idx, 0]
         except:
             print(f"{self.imgs.iat[idx, 0]} is corrupted")
+
+    
+    def get_raw_image(self, idx):
+        rawimg = Image.open(f'{self.image_dir}/{self.imgs.iat[idx, 0]}')
+        return rawimg, self.labels.iat[idx, 0]

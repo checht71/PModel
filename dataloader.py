@@ -10,8 +10,8 @@ def split_dataset(unsplit_set, split_ratio):
     return train_dataset, val_dataset
 
 
-def create_dataloaders(IMAGE_LOCATION, LABEL_CSV_LOACTION, BATCH_SIZE, VAL_SPLIT_RATIO):
-    dataset = csvImageDataset(IMAGE_LOCATION, LABEL_CSV_LOACTION)
+def create_dataloaders(IMAGE_LOCATION, LABEL_CSV_LOCATION, BATCH_SIZE, VAL_SPLIT_RATIO):
+    dataset = csvImageDataset(IMAGE_LOCATION, LABEL_CSV_LOCATION)
     train_dataset, val_dataset = split_dataset(dataset, VAL_SPLIT_RATIO)
 
     train_dataloader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
